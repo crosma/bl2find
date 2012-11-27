@@ -1,13 +1,14 @@
 {
-  "name": "bl2find",
-  "version": "0.0.1",
-  
-  "dependencies": {
-    "express": "*"
-  },
-  
-  "engines": {
-    "node": "0.8.14",
-    "npm": "1.1.x"
-  }
+	"name": "bl2find",
+	"version": "0.0.1",
+
+	"engines": {
+		"node": "0.8.14",
+		"npm": "1.1.x"
+	},
+	
+	"dependencies": {
+		"express": "*",
+		"mysql": "*"
+	}
 }
