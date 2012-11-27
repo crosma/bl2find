@@ -5,19 +5,20 @@ var prev = [];
 
 app.get('/hello.txt', function(req, res) {
 
-	var query_start_time = new Date().getTime();
+	var start = process.hrtime();
 
 	connection.query('SELECT * FROM user', function(err, rows, fields) {
 		if (err) throw err;
 		
-		var delay = new Date().getTime() - query_start_time;
+		var end = process.hrtime();
+		var delay = ((end[0] + end[1] / 1000000000) - (start[0] + start[1] / 1000000000)) + 's';
 		
-		res.write('Response Time: ' + delay + 'ms\n');
+		res.write('Response Time: ' + delay + '\n');
 		res.write('Data: ' + JSON.stringify(rows) + '\n\n');
 		res.write('Array of previous response times: ' + JSON.stringify(prev) + '\n\n');
 		res.end();
 		
-		prev.push(delay+'ms');
+		prev.push(delay);
 	});
 	
 });
