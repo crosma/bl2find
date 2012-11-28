@@ -23,16 +23,31 @@ app.get('/hello.txt', function(req, res) {
 	
 });
 
+app.get('/ping', function(req, res) {
+
+	var sys = require('sys')
+	var exec = require('child_process').exec;
+
+	exec("ping crosma.us", function(error, stdout, stderr) {
+	
+		console.log(stdout);
+		
+		res.write(stdout);
+		res.end();
+	
+	});
+	
+});
+
+
 
 var port = process.env.PORT || 80;
 app.listen(port);
 console.log('Listening on port '+port);
 
-
-
-
-
+/*
 var mysql      = require('mysql');
 var connection = mysql.createConnection(process.env.DATABASE_URL);
-
 connection.connect();
+*/
+
