@@ -23,22 +23,27 @@ app.get('/hello.txt', function(req, res) {
 	
 });
 
+var results = [];
+
 app.get('/ping', function(req, res) {
 
 	var sys = require('sys')
 	var exec = require('child_process').exec;
 
 	exec("ping crosma.us", function(error, stdout, stderr) {
-	
-		console.log(stdout);
-		
-		res.write(stdout);
-		res.end();
-	
+		results.push(stdout);
 	});
 	
+	res.write('Running ping.');
+	res.end();
 });
 
+
+
+app.get('/results', function(req, res) {
+	res.write(results.join('\n'));
+	res.end();
+});
 
 
 var port = process.env.PORT || 80;
